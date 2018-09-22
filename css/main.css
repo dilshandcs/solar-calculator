@@ -236,8 +236,8 @@ iframe {
   position: relative;
   display: block;
   width: 100%;
-  height: 55px;
-  background: #ebebeb;
+  height: 35px;
+  background: #e7f5f5;
   border-radius: 27px;
   padding: 0 35px 0 35px;
 }
