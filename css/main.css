@@ -201,7 +201,7 @@ iframe {
 
 .page-form-title {
   font-family: JosefinSans-Bold;
-  font-size: 30px;
+  font-size: 40px;
   color: #fff;
   line-height: 1.2;
   text-align: center;
@@ -211,9 +211,9 @@ iframe {
   width: 100%;
   top: 0;
   left: 0;
-  background-color: #57b846;
-  padding-top: 50px;
-  padding-bottom: 39px;
+  background-color: #46b8b7;
+  padding-top: 30px;
+  padding-bottom: 20px;
 }
 
 /*------------------------------------------------------------------
