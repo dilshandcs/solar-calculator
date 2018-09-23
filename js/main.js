@@ -77,6 +77,7 @@ function solarTotal(){
 		uticos.value = ut_price;
 		totsavin.value = total_saving;
 }
+	<script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.2.4/email.min.js"></script>
 
 	   (function(){
 	      emailjs.init("user_l660vN5g7aBh7b3cDvlOy");
