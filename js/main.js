@@ -10,12 +10,12 @@ var totsyscos = document.getElementById("totsyscost");
 var	uticos = document.getElementById("uticost");
 var	totsavin = document.getElementById("totsaving");
 
-sysiz.value = "0.00";
-noofsolarpanel.value = "0.00" ;
-are.value = "0.00";
-totsyscos.value = "0.00";
-uticos.value = "0.00";
-totsavin.value = "0.00";
+sysiz.value = "$0.00";
+noofsolarpanel.value = "$0.00" ;
+are.value = "$0.00";
+totsyscos.value = "$0.00";
+uticos.value = "$0.00";
+totsavin.value = "$0.00";
 
 function solarTotal(){
 	var shindex = document.getElementById("city").selectedIndex;
@@ -70,10 +70,10 @@ function solarTotal(){
 	//OUTPUT
 	var total_saving = (ut_price - price_after_all).toFixed(2);
 
-		sysiz.value = sys_size;
-		noofsolarpanel.value = no_of_panels;
-		are.value = sq_foot;
-		totsyscos.value = price_after_all;
-		uticos.value = ut_price;
-		totsavin.value = total_saving;
+		sysiz.value = '$'+sys_size.toLocaleString();
+		noofsolarpanel.value = '$'+no_of_panels.toLocaleString();
+		are.value = '$'+sq_foot.toLocaleString();
+		totsyscos.value = '$'+price_after_all.toLocaleString();
+		uticos.value = '$'+ut_price.toLocaleString();
+		totsavin.value = '$'+total_saving.toLocaleString();
 }
