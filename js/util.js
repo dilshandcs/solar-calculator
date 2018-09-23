@@ -16,7 +16,7 @@ function sendEmails(){
 	var	uticos = document.getElementById("uticost").value;
 	var	totsavin = document.getElementById("totsaving").value;
 		   
-	emailjs.send("gmail", "template_hatLVtq1", {"emailId":emailId,"sh":sh,"ut":u,"ub":ub,"sysiz":sysiz,"noofsolarpanel":noofsolarpanel,"are":are,"totsyscos":totsyscos,"uticos":uticos,"totsavin":totsavin})
+	emailjs.send("gmail", "template_hatLVtq1", {"emailId":emailId,"sh":sh,"ut":ut,"ub":ub,"sysiz":sysiz,"noofsolarpanel":noofsolarpanel,"are":are,"totsyscos":totsyscos,"uticos":uticos,"totsavin":totsavin})
 	.then(function(response) {
 		console.log('SUCCESS!', response.status, response.text);
 	}, function(error) {
