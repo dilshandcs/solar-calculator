@@ -1,10 +1,15 @@
 
 
 (function(){
-	emailjs.init("user_l660vN5g7aBh7b3cDvlOy");
+	emailjs.init("user_UEWGfWOZEHE5QNu03w5Kp");
 })();
 	   
 function sendEmails(){
+	var shindex = document.getElementById("city").selectedIndex;
+	var sh = document.getElementById("city").options[shindex].text;
+	var utindex = document.getElementById("utility").selectedIndex;
+	var ut = document.getElementById("utility").options[utindex].text;
+	var ub = parseFloat(document.getElementById("utilityBill").value);
 	var emailId =	document.getElementById("emailId").value;
 	var sysiz =	document.getElementById("syssize").value;
 	var	noofsolarpanel = document.getElementById("noofsolarpanels").value;
@@ -13,7 +18,7 @@ function sendEmails(){
 	var	uticos = document.getElementById("uticost").value;
 	var	totsavin = document.getElementById("totsaving").value;
 		   
-	emailjs.send("gmail", "template_LrBpUKiF", {"emailId":emailId,"sysiz":sysiz,"noofsolarpanel":noofsolarpanel,"are":are,"totsyscos":totsyscos,"uticos":uticos,"totsavin":totsavin})	 	       
+	emailjs.send("gmail", "template_hatLVtq1", {"emailId":emailId,"sh":sh,"ut":u","ub":ub,"sysiz":sysiz,"noofsolarpanel":noofsolarpanel,"are":are,"totsyscos":totsyscos,"uticos":uticos,"totsavin":totsavin})
 	.then(function(response) {
 		console.log('SUCCESS!', response.status, response.text);
 	}, function(error) {
