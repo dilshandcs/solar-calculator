@@ -1,0 +1,325 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Solar Calculation</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/dilshandcs/solarcalculator/850323b3/css/util.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/dilshandcs/solarcalculator/7480078a/css/main.css">
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!--===============================================================================================-->
+</head>
+<body style="color: #ffffff;">
+
+
+		<div class="">
+			<div class="wrap-page">
+				<form class="page-form validate-form p-l-25 p-r-25 p-t-100 p-b-20"
+					style="background-color: #330000;" action="" id="solarCal"
+					onsubmit="return false;">
+					<span class="page-form-title"> Solar Calculator </span>
+					<div class="cont_order">
+						<fieldset>
+							<legend
+								style="color: #ffffff; font-size: 14px; width: auto; margin-bottom: 0px;">
+								<b>Inputs</b>
+							</legend>
+
+							<table style="font-size: 13px; width: 100%">
+								<tr>
+									<td style="width: 25%">City<span style="color: red">*</span>
+									</td>
+									<td>
+									<!--If you have a city to add, add it after the last option tag in the following block, as following example
+										e.g. City New York. then <option value="9">New York</option> (value of the option tag must be increase by 1 of last option value)
+										if you add another, New Jersy, it must be <option value="10">New Jersy</option> 
+										Remember that, if you add a city, you must add the corresponding solar hour value to the line 231. see page 4 -->
+										
+										<div class="wrap-input100 validate-input m-b-16">
+											<select name="city" id="city" class="input100">
+												<option value="0">EVANSVILLE, IN</option>
+												<option value="1">SOUTH BEND, IN</option>
+												<option value="2">FRENCHLICK, IN</option>
+												<option value="3">GARY, IN</option>
+												<option value="4">JOPLIN, MO</option>
+												<option value="5">SPRINGFILED, MO</option>
+												<option value="6">ANGOLA, IN</option>
+												<option value="7">EASTERN, KY</option>
+												<option value="8">FT WAYNE, IN</option>
+												
+											</select> <span class="focus-input100"></span>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 25%">Utility<span style="color: red">*</span>
+									</td>
+									<td>
+										<div class="wrap-input100 validate-input m-b-16">
+										<!--If you add a an utility, follow the instructions as below
+										e.g. Utility XXXX. value of the option tag must be increase by 1 of the last value,
+										 e.g. <option value="5">XXXXk</option>
+										if you add a utility, you must add the corresponding $/kWh and fixed value to the line 236. see page 4,5 -->
+											<select name="utility" id="utility" class="input100"">
+												<option value="0">VECTREN</option>
+												<option value="1">NIPSCO</option>
+												<option value="2">EMPIRE</option>
+												<option value="3">I&M</option>
+												<option value="4">KENTUCKY POWER</option>
+											</select> <span class="focus-input100"></span>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 25%">Utility Bill<span
+										style="color: red">*</span>
+									</td>
+									<td>
+										<div class="wrap-input100 validate-input m-b-16"
+											data-validate="Please enter the Utility Bill Value">
+											<input class="input100" type="number" step="0.01"
+												name="utilityBill" id="utilityBill"
+												placeholder="Enter the values in USD"
+												style="text-align: center;" required> <span
+												class="focus-input100"></span>
+										</div>
+									</td>
+								</tr>
+							</table>
+
+							<div class="container-page-form-btn">
+								<button class="page-form-btn" id="solarTotasl"
+									onclick="javascript:solarTotal()">CALCULATE</button>
+								<div>
+						</fieldset>
+					</div>
+					<div class="text-right">
+						<span class="txt4" style="color: red"> * </span> <a href="#"
+							class="txt4"> fields are mandatory </a>
+					</div>
+
+
+					<div class="cont_order">
+						<fieldset>
+							<legend
+								style="color: #ffffff; font-size: 14px; width: auto; margin-bottom: 0px;">
+								<b>Outputs</b>
+							</legend>
+
+							<table style="font-size: 13px;">
+								<tr>
+									<td style="width: 50%">System Size (kW)</td>
+									<td>
+										<div class="wrap-input100 validate-input m-b-16">
+											<input class="input100" type="text" id="syssize"
+												name="syssize" disabled style="text-align: center;">
+											<span class="focus-input100"></span>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 25%">No. Of Solar Panels</td>
+									<td>
+										<div class="wrap-input100 validate-input m-b-16">
+											<input class="input100" type="text" id="noofsolarpanels"
+												name="noofsolarpanels" disabled style="text-align: center;">
+											<span class="focus-input100"></span>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 50%">Area (Sq~ft)</td>
+									<td>
+										<div class="wrap-input100 validate-input m-b-16"
+											data-validate="Please enter the Utility Bill Value">
+											<input class="input100" type="text" id="area" name="area"
+												disabled style="text-align: center;"> <span
+												class="focus-input100"></span>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 50%">Total System Cost ($)</td>
+									<td>
+										<div class="wrap-input100 validate-input m-b-16"
+											data-validate="Please enter the Utility Bill Value">
+											<input class="input100" type="text" id="totsyscost"
+												name="totsyscost" disabled style="text-align: center;">
+											<span class="focus-input100"></span>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 50%">Total Utility Cost ($)</td>
+									<td>
+										<div class="wrap-input100 validate-input m-b-16"
+											data-validate="Please enter the Utility Bill Value">
+											<input class="input100" type="text" id="uticost"
+												name="uticost" disabled style="text-align: center;">
+											<span class="focus-input100"></span>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 50%">Your Total Saving ($)</td>
+									<td>
+										<div class="wrap-input100 validate-input m-b-16"
+											data-validate="Please enter the Utility Bill Value">
+											<input class="input100"
+												style="background: #0000cc; text-align: center; color: wheat;"
+												type="text" id="totsaving" name="totsaving" disabled>
+											<span class="focus-input100"></span>
+										</div>
+									</td>
+								</tr>
+							</table>
+							<div class="">
+								<span class="txt1 p-b-9" style="color: #6b7386"> Do you
+									want to email these results? </span> <a href="#emailBox"
+									data-toggle="modal" id="compose-button" class="txt4"
+									style="color: #ffb900"> Email Now </a>
+							</div>
+
+						</fieldset>
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+	<!-- Email box -->
+	<div class="modal fade" id="emailBox" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Email</h4>
+				</div>
+				<div class="modal-body">
+					<p>Enter Email Address</p>
+					<input type="text" id="emailId" class="form-control"
+						placeholder="Email" aria-label="Email" required>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" type="button"
+						onclick="sendEmails();" data-dismiss="modal"
+						style="float: right; background-color: black;">Send</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						style="float: right">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+<!--===============================================================================================-->
+
+	<script>
+
+	//here is the solarhours for each city. if another city is added to the select box as last element,
+	//append it's solar hour value to the end of solaHours array with a comma withn []
+	//e.g. if you add new york - 4.00, then solarHours=[......, 3.52, 4.00]
+	var solarHours = [3.77, 3.57, 3.70, 3.60, 3.98, 3.96,3.55, 3.50, 3.52];
+
+	//here is the utility values for each utility. if another utility is added to the select box as last element,
+	//append it's $/kWh value and fixed value to the end of utilityValues array with a comma within [] as following
+	//e.g. if you add xxx usitility (0.777$/kWh value and 12.00 fixed rate),
+	// then utilityValues=[[0.135,11.00]......, [0.12, 14.00], [0.777, 12.00]]
+	var utilityValues = [[0.135,11.00], [0.119, 14.00], [0.130, 13.00], [0.105, 10.50], [0.12, 14.00]];
+	
+	
+	var sysiz =	document.getElementById("syssize");
+	var	noofsolarpanel = document.getElementById("noofsolarpanels");
+	var	are = document.getElementById("area");
+	var totsyscos = document.getElementById("totsyscost");
+	var	uticos = document.getElementById("uticost");
+	var	totsavin = document.getElementById("totsaving");
+
+	sysiz.value = "0.00";
+	noofsolarpanel.value = "0.00" ;
+	are.value = "0.00";
+	totsyscos.value = "$0.00";
+	uticos.value = "$0.00";
+	totsavin.value = "$0.00";
+
+	function solarTotal(){
+		//get the index of the selected city - shindex
+		var shindex = document.getElementById("city").selectedIndex;
+		var sh = solarHours[shindex];
+		//get index of utility
+		var utindex = document.getElementById("utility").selectedIndex;
+	  	var ut = utilityValues[utindex];
+		if(document.getElementById("utilityBill").value==''){
+			return 0;
+		}
+		
+		//get the value of utility bill as a loat value
+		ub = parseFloat(document.getElementById("utilityBill").value);
+		//monthly USAGE
+		monthlyUsage = ((ub-ut[1])/ut[0]).toFixed(2);
+		//Annual SREC and TOTAL SREC calculation
+		var annual_srec = (((monthlyUsage*12)/1000)*6).toFixed(3);
+		var total_srec = (annual_srec*10).toFixed(2);
+
+		//OUTPUTS
+		var sys_size = ((monthlyUsage * 12)/(365*sh)).toFixed(2);
+		//Incentive calculation logic
+		var incentive =0;
+		if(shindex == 4 || shindex ==5){
+			incentive = ((monthlyUsage * 12 * 500)/(365*sh)).toFixed(2);
+		}
+		//calculate the total
+		var total = (parseFloat(total_srec) + parseFloat(incentive)).toFixed(2);
+		//OUTPUTS
+		var no_of_panels = (((monthlyUsage * 12)/(365*sh)*1000)/350).toFixed(2);
+		//OUTPUTS
+		var sq_foot = ((((monthlyUsage * 12)/(365*sh)*1000)/350)*15).toFixed(2);
+
+		
+		var sys_price = (((monthlyUsage * 12)/(365*sh))*3215).toFixed(2);
+		//State Tax Calculation Logic
+		var state_tax=0;
+		if(shindex == 4 || shindex ==5){
+			state_tax = (0.0423 * ((monthlyUsage * 12)/(365*sh))*3215 ).toFixed(2);
+		}else if(shindex ==7){
+			state_tax = (0.06 * ((monthlyUsage * 12)/(365*sh))*3215 ).toFixed(2);
+		}
+		//Cost After All 
+		var sys_price_after = (((((monthlyUsage * 12)/(365*sh))*3215)*0.7)).toFixed(2);
+
+		
+
+		//OUTPUT
+		var price_after_all = sys_price_after - total;
+		console.log(total)
+		//OUTPUT
+		var ut_price = ((ub*12)*(Math.pow(1.03, 25)-1)/0.03).toFixed(2);
+
+		//OUTPUT
+		var total_saving = (ut_price - price_after_all).toFixed(2);
+
+			//Set the values to the front end text boxes
+			sysiz.value = sys_size.toLocaleString();
+			noofsolarpanel.value = no_of_panels.toLocaleString();
+			are.value = sq_foot.toLocaleString();
+			totsyscos.value = '$'+price_after_all.toLocaleString();
+			uticos.value = '$'+parseFloat(ut_price).toLocaleString();
+			totsavin.value = '$'+parseFloat(total_saving).toLocaleString();
+	}
+
+	
+	</script>
+	<script type="text/javascript"
+		src="https://cdn.emailjs.com/sdk/2.2.4/email.min.js"></script>
+	<script type="text/javascript" src="https://cdn.rawgit.com/dilshandcs/solarcalculator/55267eb9/js/util.js"></script>
+<!--===============================================================================================-->
+</body>
+
+</html>
+
